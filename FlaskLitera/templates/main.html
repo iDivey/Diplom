@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% block pagename %}
+        <h1>Главаня страница</h1>
+        {% endblock %}
+    </header>
+    <nav>
+        {% block menu %}
+        <ul>
+            <li><a href="/book">Книга</a></li>
+            <li><a href="/journal">Статья из журнала</a></li>
+            <li><a href="/conference">Статья из сборника конференции</a></li>
+        </ul>
+        <p>Чтобы узнать подробнее, выберите: <a href="/descript">Описание</a></p>
+        {% endblock %}
+    </nav>
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <footer>
+        {% block back %}
+        <p></p>
+        <button><a href="/">Вернуться на главную</a></button>
+        {% endblock %}
+    </footer>
+</body>
+</html>
