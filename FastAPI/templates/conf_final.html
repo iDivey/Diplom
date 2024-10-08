@@ -3,20 +3,20 @@
 {% block pagename %}
 <h1>Литературный источник: статья из сборника конференции</h1>
 <h3>
-  {{author}}, {{name_father_Author}} {{title}} // {{publisher}} ({{place}}, {{date}}). — {{ city }}, {{year}}. — С. {{page_start}}-{{page_end}}
+  {{conf.author}}, {{conf.name_father_Author}} {{conf.title}} // {{conf.publisher}} ({{conf.place}}, {{conf.date}}). — {{conf.city}}, {{conf.year}}. — С. {{conf.page_start}}-{{conf.page_end}}
 </h3>
 {% endblock %}
 
 {% block content %}
 <form method="post">
-  {% csrf_token %}
+  {{ csrf_input }}
   <ul>
     <label for="author">Введите только фамилию автора (Иванов):</label>
     <input type="text" id="author" name="author" maxlength="30" required>
   </ul>
   <ul>
     <label for="name_father_Author">Введите инициалы автора (И. И.):</label>
-    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="4" required>
+    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="5" required>
   </ul>
   <ul>
     <label for="title">Введите наименование статьи (Что я изучил этим летом):</label>

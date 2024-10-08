@@ -4,20 +4,20 @@
 {% block pagename %}
 <h1>Литературный источник: книга</h1>
 <h3>
-  {{book.author}}, {{book.name_father_Author}} {{book.title}} / {{book.name_father_Author}} {{book.author}}. — {{book.city}} : {{book.publisher}}, {{book.year}}
+  {{book.author}}, {{book.name_father_Author}} {{book.title}} / {{book.name_father_Author}} {{book.author}}. — {{book.city}} : {{book.publisher}}, {{book.year}}. — {{book.pages}} c.
 </h3>
 {% endblock %}
 
 {% block content %}
 <form method="post">
-  {% csrf_token %}
+  {{ csrf_input }}
   <ul>
     <label for="author">Введите только фамилию автора (Иванов):</label>
     <input type="text" id="author" name="author" maxlength="30" required>
   </ul>
   <ul>
     <label for="name_father_Author">Введите инициалы автора (И. И.):</label>
-    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="4" required>
+    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="5" required>
   </ul>
   <ul>
     <label for="title">Введите название источника (Что я делал этим летом):</label>

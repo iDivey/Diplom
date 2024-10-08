@@ -3,7 +3,7 @@
 {% block pagename %}
 <h1>Литературный источник: статья из журнала</h1>
 <h3>
-  {{author}}, {{name_father_Author}} {{title}} / {{name_father_Author}} {{author}}// {{publisher}}. — {{year}}. — № {{number_tom}}. — С. {{page_start}}-{{page_end}}
+  {{journal.author}}, {{journal.name_father_Author}} {{journal.title}} / {{journal.name_father_Author}} {{journal.author}}// {{journal.publisher}}. — {{journal.year}}. — № {{journal.number_tom}}. — С. {{journal.page_start}}-{{journal.page_end}}
 </h3>
 {% endblock %}
 
@@ -13,14 +13,14 @@
 
 {% block content %}
 <form method="post">
-  {% csrf_token %}
+  {{ csrf_input }}
   <ul>
     <label for="author">Введите только фамилию автора (Иванов):</label>
     <input type="text" id="author" name="author" maxlength="30" required>
   </ul>
   <ul>
     <label for="name_father_Author">Введите инициалы автора (И. И.):</label>
-    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="4" required>
+    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="5" required>
   </ul>
   <ul>
     <label for="title">Введите наименование статьи (Что я изучил этим летом):</label>
