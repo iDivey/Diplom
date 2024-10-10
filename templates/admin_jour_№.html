@@ -1,9 +1,0 @@
-{% extends "main.html" %}
-
-{% block pagename %}
-<h1>Запросы статей из журналов по индексу</h1>
-{% endblock %}
-
-{% block content %}
-        <p>{{ jour.id }}. Автор: {{ jour.author }} {{ jour.name_father_Author }}, название работы: {{ jour.title }}, издатель: {{ jour.publisher }}, № тома/выпуска: {{ jour.number_tom }}, год публикации: {{ jour.year}}, количество страниц: {{jour.pages}}</p><br>
-{% endblock %}
