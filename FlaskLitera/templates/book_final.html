@@ -1,18 +1,11 @@
 {% extends "main.html" %}
 
-{% block title %}
-Книга
-{% endblock %}
 
 {% block pagename %}
 <h1>Литературный источник: книга</h1>
 <h3>
   {{book.author}}, {{book.name_father_Author}} {{book.title}} / {{book.name_father_Author}} {{book.author}}. — {{book.city}} : {{book.publisher}}, {{book.year}}. — {{book.pages}} c.
 </h3>
-{% endblock %}
-
-{% block menu %}
-<p>Чтобы узнать подробнее, выберите: <a href="/descript">Описание</a></p>
 {% endblock %}
 
 {% block content %}
@@ -49,8 +42,4 @@
 
   <button type="submit">Получить результат</button>
 </form>
-{% endblock %}
-
-{% block back %}
-  {{super()}}
 {% endblock %}

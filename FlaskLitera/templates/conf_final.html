@@ -1,18 +1,10 @@
 {% extends "main.html" %}
 
-{% block title %}
-Конференция
-{% endblock %}
-
 {% block pagename %}
 <h1>Литературный источник: статья из сборника конференции</h1>
 <h3>
   {{conf.author}}, {{conf.name_father_Author}} {{conf.title}} // {{conf.publisher}} ({{conf.place}}, {{conf.date}}). — {{conf.city}}, {{conf.year}}. — С. {{conf.page_start}}-{{conf.page_end}}
 </h3>
-{% endblock %}
-
-{% block menu %}
-<p>Чтобы узнать подробнее, выберите: <a href="/descript">Описание</a></p>
 {% endblock %}
 
 {% block content %}
@@ -61,8 +53,4 @@
 
   <button type="submit">Получить результат</button>
 </form>
-{% endblock %}
-
-{% block back %}
-  {{super()}}
 {% endblock %}

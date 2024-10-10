@@ -1,19 +1,7 @@
 {% extends "main.html" %}
 
-{% block title %}
-О сайте
-{% endblock %}
-
 {% block pagename %}
 <h1>Описание</h1>
-{% endblock %}
-
-{% block menu %}
-<ul>
-  <li><a href="/book">Книга</a></li>
-  <li><a href="/journal">Статья из журнала</a></li>
-  <li><a href="/conference">Статья из сборника конференции</a></li>
-</ul>
 {% endblock %}
 
 {% block content %}
@@ -39,8 +27,4 @@
         Иными словами, материалы конференции кратко знакомят читателя со всеми научными работами так или иначе обсуждаемыми в ходе ее проведения.
     </ul>
 
-{% endblock %}
-
-{% block back %}
-    {{super()}}
 {% endblock %}

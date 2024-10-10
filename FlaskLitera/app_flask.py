@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc
+from sqlalchemy import desc, func, select, delete
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.db'
@@ -31,7 +31,6 @@ class Journal(db.Model):
     page_end = db.Column(db.Integer, nullable=False)
 
 
-
 class Conf(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
     author = db.Column(db.String(30), nullable=False)
@@ -44,7 +43,6 @@ class Conf(db.Model):
     date = db.Column(db.Integer, nullable=False)
     page_start = db.Column(db.Integer, nullable=False)
     page_end = db.Column(db.Integer, nullable=False)
-
 
 
 @app.route('/')
@@ -156,6 +154,107 @@ def conf_page():
         return render_template('conf_final.html', conf=conf)
     else:
         return render_template('conf.html')
+
+
+# Администрирование
+
+
+@app.route('/admin')
+def admin_page():
+    return render_template('admin.html')
+
+
+@app.route('/admin/book')
+def all_book():
+    books = Book.query.all()
+    return render_template('admin_book.html', books=books)
+
+
+@app.route('/admin//jour')
+def all_jour():
+    jours = Journal.query.all()
+    return render_template('admin_jour.html', jours=jours)
+
+
+@app.route('/admin//conf')
+def all_conf():
+    confs = Conf.query.all()
+    return confs
+
+
+@app.route('/admin/book/<int:id>')
+def book_by_id(id):
+    book = Book.query.get(id)
+    if book is None:
+        abort(404, description='Book not found')
+
+    return render_template('admin_book_№.html', book=book)
+
+
+@app.route('/admin/jour/<int:id>')
+def jour_by_id(id):
+    jour = Journal.query.get(id)
+    if jour is None:
+        abort(404, description='Journal not found')
+    return render_template('admin_jour_№.html', jour=jour)
+
+
+@app.route('/admin/conf/<int:id>')
+def conf_by_id(id):
+    conf = Journal.query.get(id)
+    if conf is None:
+        abort(404, description='Conf not found')
+    return render_template('admin_conf_№.html', conf=conf)
+
+
+@app.route('/delete_book/<int:id>')
+def delete_book(id):
+    book = Book.query.get(id)
+    if book is None:
+        abort(404, description='Book not found')
+    db.session.delete(book)
+    db.session.commit()
+    return jsonify({'status_code': 200, 'message': 'Book deleted successfully'})
+
+
+@app.route('/admin/delete_jour/<int:id>')
+def delete_jour(id):
+    jour = Journal.query.get(id)
+    if jour is None:
+        abort(404, description='Journal not found')
+
+    db.session.delete(jour)
+    db.session.commit()
+    return jsonify({'status_code': 200, 'message': 'Journal deleted successfully'})
+
+
+@app.route('/admin/delete_conf/<int:id>')
+def delete_conf(id):
+    conf = Conf.query.get(id)
+    if conf is None:
+        abort(404, description='Conference not found')
+
+    db.session.delete(conf)
+    db.session.commit()
+    return jsonify({'status_code': 200, 'message': 'Conference deleted successfully'})
+
+
+@app.route('/admin/stats', methods=['GET'])
+def get_stats():
+    book_count = db.session.query(func.count(Book.id)).scalar()
+    journal_count = db.session.query(func.count(Journal.id)).scalar()
+    conference_count = db.session.query(func.count(Conf.id)).scalar()
+
+    stats = {
+        'total_books': book_count,
+        'total_journals': journal_count,
+        'total_conferences': conference_count,
+    }
+
+    return jsonify(stats)
+
+
+
 
 
 if __name__ == "__main__":
