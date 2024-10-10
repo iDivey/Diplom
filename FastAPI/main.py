@@ -1,13 +1,16 @@
 from datetime import datetime
 from fastapi import FastAPI, Request, Depends, Form
-from sqlalchemy import insert, desc, select
+from sqlalchemy import insert, desc
 from sqlalchemy.orm import Session
 from models import *
 from database import engine, session_local
 from fastapi.templating import Jinja2Templates
 from typing import Annotated
+from routers import admin
 
 app = FastAPI()
+
+app.include_router(admin.router)
 
 Base.metadata.create_all(bind=engine)
 
@@ -85,8 +88,9 @@ async def journal_page(request: Request):
 
 @app.post('/journal')
 async def journal_result(request: Request, db: Annotated[Session, Depends(get_db)],
-                      author: str = Form(), name_father_Author: str = Form(), title: str = Form(),
-                      publisher: str = Form(), number_tom: int = Form(), year: int = Form(), page_start: int = Form(), page_end: int = Form()):
+                         author: str = Form(), name_father_Author: str = Form(), title: str = Form(),
+                         publisher: str = Form(), number_tom: int = Form(), year: int = Form(),
+                         page_start: int = Form(), page_end: int = Form()):
     db.execute(insert(Jour).values(
         author=author,
         name_father_Author=name_father_Author,
@@ -105,3 +109,6 @@ async def journal_result(request: Request, db: Annotated[Session, Depends(get_db
 @app.get('/descript')
 async def journal_page(request: Request):
     return templates.TemplateResponse('descript.html', {'request': request})
+
+
+
