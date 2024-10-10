@@ -1,0 +1,9 @@
+{% extends "main.html" %}
+
+{% block pagename %}
+<h1>Все запросы книг</h1>
+{% endblock %}
+
+{% block content %}
+        <p>{{ book.id }}. Автор: {{ book.author }} {{ book.name_father_Author }}, название работы: {{ book.title }}, издатель: {{ book.publisher }}, город: {{ book.city }}, год публикации: {{ book.year}}, количество страниц: {{book.pages}}</p><br>
+{% endblock %}

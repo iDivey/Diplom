@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+
+{% block pagename %}
+<h1>Литературный источник: статья из журнала</h1>
+<h3>
+  {{journal.author}}, {{journal.name_father_Author}} {{journal.title}} / {{journal.name_father_Author}} {{journal.author}}// {{journal.publisher}}. — {{journal.year}}. — № {{journal.number_tom}}. — С. {{journal.page_start}}-{{journal.page_end}}
+</h3>
+{% endblock %}
+
+{% block menu %}
+<p>Чтобы узнать подробнее, выберите: <a href="/descript">Описание</a></p>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {{ csrf_input }}
+  <ul>
+    <label for="author">Введите только фамилию автора (Иванов):</label>
+    <input type="text" id="author" name="author" maxlength="30" required>
+  </ul>
+  <ul>
+    <label for="name_father_Author">Введите инициалы автора (И. И.):</label>
+    <input  type="text" id="name_father_Author" name="name_father_Author" maxlength="5" required>
+  </ul>
+  <ul>
+    <label for="title">Введите наименование статьи (Что я изучил этим летом):</label>
+    <input type="text" id="title" name="title" maxlength="200" required>
+  </ul>
+  <ul>
+    <label for="publisher">Введите название журнала (Ежелетнее изучения всего):</label>
+    <input type="text" id="publisher" name="publisher" maxlength="50" required>
+  </ul>
+  <ul>
+    <label for="number_tom">Введите порядковый номер издания журнала (21):</label>
+    <input type="number" id="number_tom" name="number_tom" maxlength="3" required>
+  </ul>
+  <ul>
+    <label for="year">Введите год, в котором был издан источник (2000):</label>
+    <input type="number" id="year" name="year" maxlength="4" required>
+  </ul>
+  <ul>
+    <label for="page_start">Введите страницу на которой начинается статья (256):</label>
+    <input type="number" id="page_start" name="page_start" maxlength="4" required>
+  </ul>
+  <ul>
+    <label for="page_end">Введите страницу на которой заканчивается статья (287):</label>
+    <input type="number" id="page_end" name="page_end" maxlength="4" required>
+  </ul>
+
+  <button type="submit">Получить результат</button>
+</form>
+{% endblock %}

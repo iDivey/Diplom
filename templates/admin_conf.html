@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+
+{% block pagename %}
+<h1>Все запросы статей конференций</h1>
+{% endblock %}
+
+{% block content %}
+    {% for conf in confs: %}
+        <p>{{ jour.id }}. {{conf.author}}, {{conf.name_father_Author}} {{conf.title}} // {{conf.publisher}} ({{conf.place}}, {{conf.date}}). — {{conf.city}}, {{conf.year}}. — С. {{conf.page_start}}-{{conf.page_end}}</p><br>
+    {% endfor %}
+{% endblock %}
