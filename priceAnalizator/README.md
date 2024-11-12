@@ -3,11 +3,11 @@
 
 ## Содержание
 
-- [Библиотеки] (#библиотеки)
+- [Библиотеки и модули](#библиотеки и модули)
 - [Использование](#использование)
 - [Разработка](#разработка)
 
-## Библиотеки
+## Библиотеки и модули
 - [os](https://docs.python.org/3/library/os.html)
 - [pandas](https://pandas.pydata.org/docs/)
 - [prettytable](https://pypi.org/project/prettytable/)
